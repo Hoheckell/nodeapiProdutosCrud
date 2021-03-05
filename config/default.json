@@ -1,0 +1,9 @@
+{ 
+    "db": {
+        "host": "localhost",
+        "port": 5432,
+        "name": "produtos",
+        "user": "postgres",
+        "password":"b26a53c0f6e34bd495fe8c830ae7ddfa"
+    }
+}

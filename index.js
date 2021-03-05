@@ -3,19 +3,21 @@ let express = require('express'),
   sequelize = require('sequelize'),
   cors = require('cors'),
   bodyParser = require('body-parser'),
-  postgres = require('./database/db');
+  postgres = require('./database/db'); 
   const createError = require('http-errors');
-const prodRoute = require('./routes/produto.routes');
+  const config = require('config');
 
-  const sql = new sequelize('postgres://postgres:b26a53c0f6e34bd495fe8c830ae7ddfa@localhost:5432/produtos');
+const prodRoute = require('./routes/produto.routes');
+;
+  const sql = new sequelize("postgres://"+config.get('db.user')+":"+config.get('db.password')+"@"+config.get('db.host')+":"+config.get('db.port'), {logging: false});
   sql.Promise = global.Promise;
   
 
 const bookRoute = require('./routes/produto.routes')
 
 const app = express();
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({
+app.use(express.json());
+app.use(express.urlencoded({
   extended: false
 }));
 app.use(cors());
