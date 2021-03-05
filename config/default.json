@@ -5,5 +5,8 @@
         "name": "produtos",
         "user": "postgres",
         "password":"b26a53c0f6e34bd495fe8c830ae7ddfa"
+    },
+    "jwt":{
+        "JWT_SECRET_KEY": "BakulebaxPikusLobotokus"
     }
 }
