@@ -1,19 +1,19 @@
 let express = require('express'),
-  path = require('path'),
-  sequelize = require('sequelize'),
-  cors = require('cors'),
-  bodyParser = require('body-parser'),
-  postgres = require('./database/db'); 
-  const createError = require('http-errors');
-  const config = require('config');
-
-const prodRoute = require('./routes/produto.routes');
-;
-  const sql = new sequelize("postgres://"+config.get('db.user')+":"+config.get('db.password')+"@"+config.get('db.host')+":"+config.get('db.port'), {logging: false});
-  sql.Promise = global.Promise;
+path = require('path'),
+sequelize = require('sequelize'),
+cors = require('cors'),
+bodyParser = require('body-parser'),
+postgres = require('./database/db'); 
+const createError = require('http-errors');
+const config = require('config');
+const userRoute = require('./routes/usuario.routes');
+const freeRoute =  require('./routes/free.routes');
+const serviceRoute =  require('./routes/servico.routes');
+const sql = new sequelize("postgres://"+config.get('db.user')+":"+config.get('db.password')+"@"+config.get('db.host')+":"+config.get('db.port'), {logging: false});
+sql.Promise = global.Promise;
   
 
-const bookRoute = require('./routes/produto.routes')
+const bookRoute = require('./routes/usuario.routes');
 
 const app = express();
 app.use(express.json());
@@ -25,10 +25,12 @@ app.use(cors());
 // Static directory path
 app.use(express.static(path.join(__dirname, 'dist/static')));
 
-
-// API root
-app.use('/api', prodRoute);
-
+// user routes
+app.use('/api/usuario', userRoute);
+// free routing
+app.use('/faztudo',freeRoute);
+// services routes
+app.use('/api/servico',serviceRoute);
 // PORT
 const port = process.env.PORT || 8000;
 
