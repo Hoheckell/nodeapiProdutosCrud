@@ -8,7 +8,6 @@ const verifyToken = (req, res, next) => {
     try {
         let token = req.headers.authorization;// Remove Bearer from string
         token = token.replace(/^Bearer\s+/, "");
-        console.log(token)
         const verified = jwt.verify(token, jwtSecretKey);
         if(verified){
             next();
