@@ -5,9 +5,21 @@ const jwt = require('jsonwebtoken');
 const sequelize = require("sequelize");
 const {DataTypes} = require("sequelize");
 const Usuario = require('../models/Usuario')(sequelize, DataTypes);
+const Servico = require('../models/Servico')(sequelize, DataTypes);
 const freeRoute = express.Router();
 const bcrypt = require('bcrypt');
+const serviceRoute = require("./servico.routes");
 const saltRounds = 10;
+
+// Todos Serviços
+serviceRoute.route('/').get((req, res) => {
+    Servico.findAll().then(servicos => {
+        return res.json(servicos);
+        res.sendStatus(200);
+    }).catch(err => {
+        console.error(err)
+    })
+});
 
 // Adiciona Usuario
 freeRoute.route('/add-user').post((req, res, next) => {

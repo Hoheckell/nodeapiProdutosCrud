@@ -12,15 +12,6 @@ serviceRoute.route('/add-servico').post(verifyToken,(req, res, next) => {
             res.send(err);
         }); 
   });
-// Todos Serviços
-serviceRoute.route('/').get(verifyToken,(req, res) => {
-    Servico.findAll().then(servicos => {
-      return res.json(servicos);
-      res.sendStatus(200);
-    }).catch(err => {
-      console.error(err)
-    })
-});
 
 // Um Serviço
 serviceRoute.route('/:id').get(verifyToken,(req, res) => {
